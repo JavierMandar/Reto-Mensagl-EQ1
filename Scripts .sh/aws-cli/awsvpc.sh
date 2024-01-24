@@ -54,21 +54,20 @@ aws ec2 create-route --route-table-id $routeTablePrivadaId --destination-cidr-bl
 # Asociar tabla de rutas privada a la subred privada
 aws ec2 associate-route-table --subnet-id $subnetPrivadaId --route-table-id $routeTablePrivadaId
 
-#Lanzar instancias (Debian t2.micro) en la subred publica
+#Lanzar instancias (Debian t2.medium) en la subred publica
 aws ec2 run-instances \
     --image-id $DEBIAN \
     --count 1 \
-    --instance-type t2.micro \
-    --key-name Reto2 \
+    --instance-type t2.medium \
+    --key-name $KEY_NAME \
     --subnet-id $subnetPublicaId \
     --associate-public-ip-address
 
-#Lanzar instancias (Ubuntu t2.micro) en la subred privada
+#Lanzar instancias (Ubuntu t2.medium) en la subred privada
 
 aws ec2 run-instances \
     --image-id $UBUNTU \
     --count 1 \
-    --instance-type t2.micro \
-    --key-name Reto2 \
+    --instance-type t2.medium \
+    --key-name $KEY_NAME \
     --subnet-id $subnetPrivadaId \
-    --associate-public-ip-address
